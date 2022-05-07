@@ -4,12 +4,9 @@
  */
 package QL_Hoa_Don;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -103,7 +100,7 @@ public class TimKiemHoaDon extends javax.swing.JFrame {
         System.out.println(hd.getMaHoaDon());
         System.out.println(value);
         
-        if(value == null ? hd.getMaHoaDon() == null : value.equals(hd.getMaHoaDon())) {
+        if(value == null ? hd.getMaHoaDon() == null : value.equals(hd.getMaHoaDon()) || (value == null ? df.format(ngayLapHD) == null : value.equals(df.format(ngayLapHD)))) {
             txtResult.append(hd.toString());
         } else {
             JOptionPane.showMessageDialog(rootPane, "Không tìm thấy hoặc nhập không hợp lệ");
