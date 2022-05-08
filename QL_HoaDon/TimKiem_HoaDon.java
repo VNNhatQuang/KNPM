@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package QL_Hoa_Don;
+package QL_HoaDon;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
  *
  * @author quang
  */
-public class TimKiemHoaDon extends javax.swing.JFrame {
+public class TimKiem_HoaDon extends javax.swing.JFrame {
 
     /**
      * Creates new form TimKiemHoaDon
      */
-    public TimKiemHoaDon() {
+    public TimKiem_HoaDon() {
         initComponents();
     }
 
@@ -38,6 +38,7 @@ public class TimKiemHoaDon extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tìm Kiếm Hóa Đơn");
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -67,9 +68,9 @@ public class TimKiemHoaDon extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                        .addGap(242, 242, 242)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                        .addComponent(btnSearch)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -94,17 +95,23 @@ public class TimKiemHoaDon extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
         Date ngayLapHD = new Date();
-        HoaDon hd = new HoaDon("123", "19t1021198", "12345", ngayLapHD, 10000000, "01234567", 4, 2500000, 10000000);
+        HoaDon[] hd = new HoaDon[5];
+        
+        for(int i=0; i<hd.length; i++) {
+            String maHD = String.valueOf(i);
+            hd[i] = new HoaDon(maHD, "Võ Ngọc Nhật Quang", "19t1021198", ngayLapHD, "01234567", 3, 20000);
+        }
         
         String value = txtSearch.getText();
-        System.out.println(hd.getMaHoaDon());
-        System.out.println(value);
         
-        if(value == null ? hd.getMaHoaDon() == null : value.equals(hd.getMaHoaDon()) || (value == null ? df.format(ngayLapHD) == null : value.equals(df.format(ngayLapHD)))) {
-            txtResult.append(hd.toString());
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Không tìm thấy hoặc nhập không hợp lệ");
+        int dem=0;
+        for(int i=0; i<hd.length; i++) {
+            if((value == null ? hd[i].getMaHoaDon() == null : value.equals(hd[i].getMaHoaDon())) || (value == null ? df.format(hd[i].getNgayLapHoaDon()) == null : value.equals(df.format(hd[i].getNgayLapHoaDon())))) {
+                txtResult.append(hd[i].toString() + "\n" + "------------------------------\n\n");
+            } else dem++;
         }
+        if(dem==hd.length) JOptionPane.showMessageDialog(rootPane, "Không tìm thấy Hóa đơn");
+        txtSearch.setText(null);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -128,8 +135,9 @@ public class TimKiemHoaDon extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TimKiemHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TimKiem_HoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
         
         //</editor-fold>
@@ -137,7 +145,7 @@ public class TimKiemHoaDon extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TimKiemHoaDon().setVisible(true);
+                new TimKiem_HoaDon().setVisible(true);
             }
         });
     }

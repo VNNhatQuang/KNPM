@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package QL_Hoa_Don;
+package QL_HoaDon;
 
 /**
  *
@@ -12,16 +12,14 @@ public class ChiTietHoaDon {
     private String maSP;
     private int soLuong;
     private double donGia;
-    private double thanhTien;
 
     public ChiTietHoaDon() {
     }
 
-    public ChiTietHoaDon(String maSP, int soLuong, double donGia, double thanhTien) {
+    public ChiTietHoaDon(String maSP, int soLuong, double donGia) {
         this.maSP = maSP;
         this.soLuong = soLuong;
         this.donGia = donGia;
-        this.thanhTien = thanhTien;
     }
 
     public String getMaSP() {
@@ -48,19 +46,14 @@ public class ChiTietHoaDon {
         this.donGia = donGia;
     }
 
-    public double getThanhTien() {
-        return thanhTien;
-    }
-
-    public void setThanhTien(double thanhTien) {
-        this.thanhTien = thanhTien;
+    public double ThanhTien() {
+        return this.getSoLuong() * this.getDonGia();
     }
 
     @Override
     public String toString() {
-        return "ChiTietHoaDon{" + "maSP=" + maSP + ", soLuong=" + soLuong + ", donGia=" + donGia + ", thanhTien=" + thanhTien + '}';
+        return "ChiTietHoaDon{" + "maSP=" + maSP + ", soLuong=" + soLuong + ", donGia=" + donGia + ", thanhTien=" + ThanhTien() + '}';
     }
-    
     
     
 }

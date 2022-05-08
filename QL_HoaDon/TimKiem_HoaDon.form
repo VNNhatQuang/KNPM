@@ -3,6 +3,7 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m H&#xf3;a &#x110;&#x1a1;n"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -29,9 +30,9 @@
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Component id="txtSearch" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnClear" pref="67" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="242" max="-2" attributes="0"/>
-                      <Component id="btnSearch" max="32767" attributes="0"/>
+                      <Component id="btnClear" min="-2" pref="67" max="-2" attributes="0"/>
+                      <EmptySpace pref="242" max="32767" attributes="0"/>
+                      <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
