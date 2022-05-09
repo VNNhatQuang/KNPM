@@ -4,10 +4,8 @@
  */
 package QL_HoaDon;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -351,7 +349,7 @@ public class Them_HoaDon extends javax.swing.JFrame {
         }
         
         try {
-            FileOutputStream fileOut = new FileOutputStream("./src/QL_HoaDon/hoaDonBanHang.data");
+            FileOutputStream fileOut = new FileOutputStream("./src/QL_HoaDon/CSDL_HĐ/MHĐ_" + txtMaHD.getText() + ".data");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             
             // Ghi thông tin hóa đơn (Mã HĐ, Tên KH, Tên NV, Ngày lập HĐ,..)

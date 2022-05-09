@@ -5,8 +5,14 @@
 package QL_HoaDon;
 
 import java.text.SimpleDateFormat;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,6 +42,7 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtResult = new javax.swing.JTextArea();
         btnClear = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tìm Kiếm Hóa Đơn");
@@ -58,6 +65,10 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Thông tin Hóa Đơn");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,7 +81,8 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
-                        .addComponent(btnSearch)))
+                        .addComponent(btnSearch))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -82,8 +94,10 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch)
                     .addComponent(btnClear))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addGap(11, 11, 11)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -93,25 +107,60 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-        Date ngayLapHD = new Date();
-        HoaDon[] hd = new HoaDon[5];
-        
-        for(int i=0; i<hd.length; i++) {
-            String maHD = String.valueOf(i);
-            hd[i] = new HoaDon(maHD, "Võ Ngọc Nhật Quang", "19t1021198", ngayLapHD, "01234567", 3, 20000);
+//        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+//        Date ngayLapHD = new Date();
+//        HoaDon[] hd = new HoaDon[5];
+//        
+//        for(int i=0; i<hd.length; i++) {
+//            String maHD = String.valueOf(i);
+//            hd[i] = new HoaDon(maHD, "Võ Ngọc Nhật Quang", "19t1021198", ngayLapHD, "01234567", 3, 20000);
+//        }
+//        
+//        String value = txtSearch.getText();
+//        
+//        int dem=0;
+//        for(int i=0; i<hd.length; i++) {
+//            if((value == null ? hd[i].getMaHoaDon() == null : value.equals(hd[i].getMaHoaDon())) || (value == null ? df.format(hd[i].getNgayLapHoaDon()) == null : value.equals(df.format(hd[i].getNgayLapHoaDon())))) {
+//                txtResult.append(hd[i].toString() + "\n" + "------------------------------\n\n");
+//            } else dem++;
+//        }
+//        if(dem==hd.length) JOptionPane.showMessageDialog(rootPane, "Không tìm thấy Hóa đơn");
+//        txtSearch.setText(null);
+
+        try {
+            FileInputStream fileInt = new FileInputStream("./src/QL_HoaDon/CSDL_HĐ/MHĐ_" + txtSearch.getText() + ".data");
+            ObjectInputStream intput = new ObjectInputStream(fileInt);
+            SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+
+            String maHD = intput.readObject().toString();
+            String tenKH = intput.readObject().toString();
+            String tenNV = intput.readObject().toString();
+            Date ngayLapHD = (Date) intput.readObject();
+            txtResult.append("Mã HĐ: " + maHD + "\nTên KH: " + tenKH + "\nTên NV: " + tenNV + "\nNgày lập HĐ: " + df.format(ngayLapHD));
+            
+            double tongTien=0;
+            txtResult.append("\n\nCác Sản phẩm đã mua :");
+            for(int i=0; i<100; i++) {
+                int stt = Integer.parseInt(intput.readObject().toString());
+                String maSP = intput.readObject().toString();
+                String tenSP = intput.readObject().toString();
+                int soLuong = Integer.parseInt(intput.readObject().toString());
+                double donGia = Double.parseDouble(intput.readObject().toString());
+                double thanhTien = Double.parseDouble(intput.readObject().toString());
+                txtResult.append("\n\tSTT: " + stt + "\n\tMã SP: " + maSP + "\n\tTên SP: " + tenSP + "\n\tSố lượng: " + soLuong + "\n\tĐơn giá: " + donGia + "\n\tThành tiền: " + thanhTien + "\n\t----------");
+                tongTien+=thanhTien;
+            }
+            
+            fileInt.close();
+            intput.close();
+            
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Không tìm thấy Hóa đơn");
+        } catch (IOException ex) {
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TimKiem_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        String value = txtSearch.getText();
-        
-        int dem=0;
-        for(int i=0; i<hd.length; i++) {
-            if((value == null ? hd[i].getMaHoaDon() == null : value.equals(hd[i].getMaHoaDon())) || (value == null ? df.format(hd[i].getNgayLapHoaDon()) == null : value.equals(df.format(hd[i].getNgayLapHoaDon())))) {
-                txtResult.append(hd[i].toString() + "\n" + "------------------------------\n\n");
-            } else dem++;
-        }
-        if(dem==hd.length) JOptionPane.showMessageDialog(rootPane, "Không tìm thấy Hóa đơn");
-        txtSearch.setText(null);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -139,20 +188,19 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TimKiem_HoaDon().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TimKiem_HoaDon().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtResult;
     private javax.swing.JTextField txtSearch;
