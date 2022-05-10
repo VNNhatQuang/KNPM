@@ -140,7 +140,7 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
             txtResult.append("Mã HĐ: " + maHD + "\nTên KH: " + tenKH + "\nTên NV: " + tenNV + "\nNgày lập HĐ: " + df.format(ngayLapHD));
             
             txtResult.append("\n\nCác Sản phẩm đã mua :");
-            for(int i=0; i<10; i++) {
+            for(int i=0; i<100; i++) {
                 int stt = Integer.parseInt(intput.readObject().toString());
                 String maSP = intput.readObject().toString();
                 String tenSP = intput.readObject().toString();

@@ -365,7 +365,7 @@ public class Them_HoaDon extends javax.swing.JFrame {
                 }
             }
             
-            txtTongTien.setText("Thêm thành công");
+            txtTongTien.setText("Thêm Hóa Đơn : MHĐ _" + txtMaHD.getText() + ".data thành công");
             
             out.close();
             fileOut.close();
