@@ -127,6 +127,7 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
 //        if(dem==hd.length) JOptionPane.showMessageDialog(rootPane, "Không tìm thấy Hóa đơn");
 //        txtSearch.setText(null);
 
+        double tongTien=0;
         try {
             FileInputStream fileInt = new FileInputStream("./src/QL_HoaDon/CSDL_HĐ/MHĐ_" + txtSearch.getText() + ".data");
             ObjectInputStream intput = new ObjectInputStream(fileInt);
@@ -138,9 +139,8 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
             Date ngayLapHD = (Date) intput.readObject();
             txtResult.append("Mã HĐ: " + maHD + "\nTên KH: " + tenKH + "\nTên NV: " + tenNV + "\nNgày lập HĐ: " + df.format(ngayLapHD));
             
-            double tongTien=0;
             txtResult.append("\n\nCác Sản phẩm đã mua :");
-            for(int i=0; i<100; i++) {
+            for(int i=0; i<10; i++) {
                 int stt = Integer.parseInt(intput.readObject().toString());
                 String maSP = intput.readObject().toString();
                 String tenSP = intput.readObject().toString();
@@ -160,6 +160,9 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TimKiem_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            txtResult.append("\nTổng tiền: " + tongTien);
+            txtResult.append("\n////////////////////////////////////////////////////////////////////////////////////////////////////\n\n");
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
