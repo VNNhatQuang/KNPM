@@ -137,7 +137,7 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
             String tenKH = intput.readObject().toString();
             String tenNV = intput.readObject().toString();
             Date ngayLapHD = (Date) intput.readObject();
-            txtResult.append("Mã HĐ: " + maHD + "\nTên KH: " + tenKH + "\nTên NV: " + tenNV + "\nNgày lập HĐ: " + df.format(ngayLapHD));
+            txtResult.append("Mã HĐ: " + maHD + "\nTên KH: " + tenKH + "\nTên NV bán hàng: " + tenNV + "\nNgày lập HĐ: " + df.format(ngayLapHD));
             
             txtResult.append("\n\nCác Sản phẩm đã mua :");
             for(int i=0; i<100; i++) {
@@ -162,7 +162,7 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
             Logger.getLogger(TimKiem_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             txtResult.append("\nTổng tiền: " + tongTien);
-            txtResult.append("\n////////////////////////////////////////////////////////////////////////////////////////////////////\n\n");
+            txtResult.append("\n////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n\n");
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
