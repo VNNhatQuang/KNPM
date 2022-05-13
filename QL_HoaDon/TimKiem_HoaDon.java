@@ -47,7 +47,7 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tìm Kiếm Hóa Đơn");
 
-        btnSearch.setText("Search");
+        btnSearch.setText("🔎"); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -58,7 +58,7 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
         txtResult.setRows(5);
         jScrollPane1.setViewportView(txtResult);
 
-        btnClear.setText("Clear");
+        btnClear.setText("Clear All");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
@@ -77,31 +77,32 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
-                        .addComponent(btnSearch))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(btnClear)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearch)
-                    .addComponent(btnClear))
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnClear, btnSearch});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -127,6 +128,7 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
 //        if(dem==hd.length) JOptionPane.showMessageDialog(rootPane, "Không tìm thấy Hóa đơn");
 //        txtSearch.setText(null);
 
+        int fin=0;
         double tongTien=0;
         try {
             FileInputStream fileInt = new FileInputStream("./src/QL_HoaDon/CSDL_HĐ/MHĐ_" + txtSearch.getText() + ".data");
@@ -147,7 +149,7 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
                 int soLuong = Integer.parseInt(intput.readObject().toString());
                 double donGia = Double.parseDouble(intput.readObject().toString());
                 double thanhTien = Double.parseDouble(intput.readObject().toString());
-                txtResult.append("\n\tSTT: " + stt + "\n\tMã SP: " + maSP + "\n\tTên SP: " + tenSP + "\n\tSố lượng: " + soLuong + "\n\tĐơn giá: " + donGia + "\n\tThành tiền: " + thanhTien + "\n\t----------");
+                txtResult.append("\n\tSTT: " + stt + "\n\tMã SP: " + maSP + "\n\tTên SP: " + tenSP + "\n\tSố lượng: " + soLuong + "\n\tĐơn giá: " + donGia + " VND / cái" + "\n\tThành tiền: " + thanhTien + " VND\n\t----------");
                 tongTien+=thanhTien;
             }
             
@@ -156,13 +158,16 @@ public class TimKiem_HoaDon extends javax.swing.JFrame {
             
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, "Không tìm thấy Hóa đơn");
+            fin++;
         } catch (IOException ex) {
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TimKiem_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            txtResult.append("\nTổng tiền: " + tongTien);
-            txtResult.append("\n////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n\n");
+            if(fin==0) {
+                txtResult.append("\nTổng tiền: " + tongTien + " VND");
+                txtResult.append("\n\n////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n\n");
+            }
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
