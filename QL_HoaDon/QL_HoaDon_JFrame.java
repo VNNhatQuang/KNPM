@@ -147,15 +147,7 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
             new String [] {
                 "STT", "Mã SP", "Tên SP", "Số Lượng", "Đơn Giá", "Thành tiền"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         jScrollPane2.setViewportView(tblSanPham);
 
         jLabel7.setText("Số lượng :");
@@ -346,7 +338,7 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
+            .addComponent(jTabbedPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,10 +389,10 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Không tìm thấy Hóa đơn");
             fin++;
         } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(QL_HoaDon_JFrame.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(QL_HoaDon_JFrame.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if(fin==0) {
-                txtResult.append("\nTổng tiền: " + tongTien + " VND");
+                txtResult.append("\n\nTổng tiền: " + tongTien + " VND");
                 txtResult.append("\n\n////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n\n");
             }
         }
@@ -447,7 +439,7 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
                 }
             }
 
-            txtTongTien.setText("Đã thêm HĐ : MHĐ _" + txtMaHD.getText() + ".data");
+            txtTongTien.setText("Đã thêm HĐ :     MHĐ _" + txtMaHD.getText() + ".data");
 
             out.close();
             fileOut.close();
