@@ -4,6 +4,7 @@
  */
 package QL_HoaDon;
 
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,8 +14,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Date;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -72,6 +71,7 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtResult = new javax.swing.JTextArea();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý Hóa đơn");
@@ -98,6 +98,11 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
 
         txtMaHD.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtMaHD.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtMaHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaHDActionPerformed(evt);
+            }
+        });
 
         txtMaSP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtMaSP.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -139,6 +144,11 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
 
         txtTenKH.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTenKH.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtTenKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTenKHActionPerformed(evt);
+            }
+        });
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -297,6 +307,8 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
         txtResult.setRows(5);
         jScrollPane1.setViewportView(txtResult);
 
+        jLabel11.setText("Tìm kiếm :");
+
         javax.swing.GroupLayout PnTimKiemHDLayout = new javax.swing.GroupLayout(PnTimKiemHD);
         PnTimKiemHD.setLayout(PnTimKiemHDLayout);
         PnTimKiemHDLayout.setHorizontalGroup(
@@ -305,14 +317,16 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PnTimKiemHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnTimKiemHDLayout.createSequentialGroup()
+                    .addGroup(PnTimKiemHDLayout.createSequentialGroup()
                         .addComponent(btnClear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
                         .addGap(63, 63, 63))
                     .addGroup(PnTimKiemHDLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -320,15 +334,17 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
             PnTimKiemHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnTimKiemHDLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PnTimKiemHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PnTimKiemHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(PnTimKiemHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearch))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(PnTimKiemHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -353,14 +369,14 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
+        btnSearchActionPerformed(evt);
     }//GEN-LAST:event_txtSearchActionPerformed
-
+    
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         int fin=0;
         double tongTien=0;
         try {
-            FileInputStream fileInt = new FileInputStream("./src/QL_HoaDon/CSDL_HĐ/MHĐ_" + txtSearch.getText() + ".data");
+            FileInputStream fileInt = new FileInputStream("./src/QL_HoaDon/Hoa Don/MHĐ_" + txtSearch.getText() + ".data");
             ObjectInputStream intput = new ObjectInputStream(fileInt);
             SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 
@@ -368,7 +384,7 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
             String tenKH = intput.readObject().toString();
             String tenNV = intput.readObject().toString();
             Date ngayLapHD = (Date) intput.readObject();
-            txtResult.append("Mã HĐ: " + maHD + "\nTên KH: " + tenKH + "\nTên NV bán hàng: " + tenNV + "\nNgày lập HĐ: " + df.format(ngayLapHD));
+            txtResult.append("Mã HĐ:\t\t" + maHD + "\nTên KH:\t\t" + tenKH + "\nTên NV bán hàng:\t" + tenNV + "\nNgày lập HĐ:\t\t" + df.format(ngayLapHD));
 
             txtResult.append("\n\nCác Sản phẩm đã mua :");
             for(int i=0; i<100; i++) {
@@ -388,12 +404,11 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, "Không tìm thấy Hóa đơn");
             fin++;
-        } catch (IOException | ClassNotFoundException ex) {
-//            Logger.getLogger(QL_HoaDon_JFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        } catch (IOException | ClassNotFoundException ex) {}
+        finally {
             if(fin==0) {
-                txtResult.append("\n\nTổng tiền: " + tongTien + " VND");
-                txtResult.append("\n\n////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n\n");
+                txtResult.append("\n\nTổng tiền:\t" + tongTien + " VND");
+                txtResult.append("\n\n////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n\n");
             }
         }
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -412,40 +427,41 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSoLuongActionPerformed
 
     private void btnThemHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemHDActionPerformed
-        int len = tblSanPham.getRowCount();
-        ChiTietHoaDon[] cthd = new ChiTietHoaDon[len];
-        for(int i=0; i<tblSanPham.getRowCount(); i++) {
-            String maSP = (String)tblSanPham.getValueAt(i, 1);
-            int soLuong = (int)tblSanPham.getValueAt(i, 3);
-            double donGia = (double)tblSanPham.getValueAt(i, 4);
+        if("".equals(txtMaHD.getText()) || "".equals(txtTenKH.getText()) || tblSanPham.getRowCount()==0) JOptionPane.showMessageDialog(rootPane, "Thông tin Hóa đơn không hợp lệ!");
+        else {
+            int len = tblSanPham.getRowCount();
+            ChiTietHoaDon[] cthd = new ChiTietHoaDon[len];
+            for(int i=0; i<tblSanPham.getRowCount(); i++) {
+                String maSP = (String)tblSanPham.getValueAt(i, 1);
+                int soLuong = (int)tblSanPham.getValueAt(i, 3);
+                double donGia = (double)tblSanPham.getValueAt(i, 4);
 
-            cthd[i] = new ChiTietHoaDon(maSP, soLuong, donGia);
-        }
-
-        try {
-            FileOutputStream fileOut = new FileOutputStream("./src/QL_HoaDon/CSDL_HĐ/MHĐ_" + txtMaHD.getText() + ".data");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-
-            // Ghi thông tin hóa đơn (Mã HĐ, Tên KH, Tên NV, Ngày lập HĐ,..)
-            out.writeObject(txtMaHD.getText());
-            out.writeObject(txtTenKH.getText());
-            out.writeObject(txtTenNV.getText());
-            out.writeObject(txtNgayLapHD.getDate());
-
-            // Ghi chi tiết hóa đơn (table)
-            for(int row=0; row < tblSanPham.getRowCount(); row++) {
-                for(int col=0; col<tblSanPham.getColumnCount(); col++) {
-                    out.writeObject(tblSanPham.getValueAt(row, col).toString());
-                }
+                cthd[i] = new ChiTietHoaDon(maSP, soLuong, donGia);
             }
 
-            txtTongTien.setText("Đã thêm HĐ :     MHĐ _" + txtMaHD.getText() + ".data");
+            try {
+                FileOutputStream fileOut = new FileOutputStream("./src/QL_HoaDon/Hoa Don/MHĐ_" + txtMaHD.getText() + ".data");
+                ObjectOutputStream out = new ObjectOutputStream(fileOut);
 
-            out.close();
-            fileOut.close();
+                // Ghi thông tin hóa đơn (Mã HĐ, Tên KH, Tên NV, Ngày lập HĐ,..)
+                out.writeObject(txtMaHD.getText());
+                out.writeObject(txtTenKH.getText());
+                out.writeObject(txtTenNV.getText());
+                out.writeObject(txtNgayLapHD.getDate());
 
-        } catch(IOException e) {
+                // Ghi chi tiết hóa đơn (table)
+                for(int row=0; row < tblSanPham.getRowCount(); row++) {
+                    for(int col=0; col<tblSanPham.getColumnCount(); col++) {
+                        out.writeObject(tblSanPham.getValueAt(row, col).toString());
+                    }
+                }
 
+                txtTongTien.setText("Đã thêm HĐ :     MHĐ _" + txtMaHD.getText() + ".data");
+
+                out.close();
+                fileOut.close();
+
+            } catch(IOException e) {}
         }
     }//GEN-LAST:event_btnThemHDActionPerformed
 
@@ -485,6 +501,14 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btnThemSPActionPerformed
+
+    private void txtMaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaHDActionPerformed
+
+    }//GEN-LAST:event_txtMaHDActionPerformed
+
+    private void txtTenKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenKHActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTenKHActionPerformed
 
     /**
      * @param args the command line arguments
@@ -532,6 +556,7 @@ public class QL_HoaDon_JFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnThemSP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
