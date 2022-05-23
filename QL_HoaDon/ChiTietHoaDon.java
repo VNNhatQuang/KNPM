@@ -12,6 +12,7 @@ public class ChiTietHoaDon {
     private String maSP;
     private int soLuong;
     private double donGia;
+    double GiamGia;
 
     public ChiTietHoaDon() {
     }
@@ -46,13 +47,14 @@ public class ChiTietHoaDon {
         this.donGia = donGia;
     }
 
-    public double ThanhTien() {
-        return this.getSoLuong() * this.getDonGia();
+    public double ThanhTien(double mucGiamGia) {
+        GiamGia = (this.getSoLuong() * this.getDonGia()) - ((mucGiamGia / 100) * (this.getSoLuong() * this.getDonGia()));
+        return GiamGia;
     }
 
     @Override
     public String toString() {
-        return "ChiTietHoaDon{" + "maSP=" + maSP + ", soLuong=" + soLuong + ", donGia=" + donGia + ", thanhTien=" + ThanhTien() + '}';
+        return "ChiTietHoaDon{" + "maSP=" + maSP + ", soLuong=" + soLuong + ", donGia=" + donGia + ", thanhTien=" + ThanhTien(GiamGia) + '}';
     }
     
     

@@ -66,13 +66,9 @@ public class HoaDon extends ChiTietHoaDon {
         this.ngayLapHoaDon = ngayLapHoaDon;
     }
 
-    public double TongTien() {
-        return ThanhTien();
-    }
-
     @Override
     public String toString() {
-        return "MaHoaDon = " + maHoaDon + "\n TenKH = " + tenKH + "\n MaNV = " + maNV + "\n NgayLapHoaDon = " + ngayLapHoaDon + "\n MaSP = " + this.getMaSP() + "\n SoLuong = " + this.getSoLuong() + "\n DonGia = " + this.getDonGia() + "\n ThanhTien = " + ThanhTien() + "\n TongTien = " + TongTien();
+        return "MaHoaDon = " + maHoaDon + "\n TenKH = " + tenKH + "\n MaNV = " + maNV + "\n NgayLapHoaDon = " + ngayLapHoaDon + "\n MaSP = " + this.getMaSP() + "\n SoLuong = " + this.getSoLuong() + "\n DonGia = " + this.getDonGia();
     }
 
     
