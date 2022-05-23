@@ -491,6 +491,7 @@ public class QL_HoaDon extends javax.swing.JFrame {
     private void btnClearAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAllActionPerformed
         DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
         model.setRowCount(0);
+        txtGiamGiaHD.setText("0");
     }//GEN-LAST:event_btnClearAllActionPerformed
 
     private void txtMaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSPActionPerformed
