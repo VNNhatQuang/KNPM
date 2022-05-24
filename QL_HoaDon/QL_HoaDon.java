@@ -4,7 +4,6 @@
  */
 package QL_HoaDon;
 
-import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -433,6 +432,7 @@ public class QL_HoaDon extends javax.swing.JFrame {
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         txtResult.setText(null);
+        txtSearch.setText(null);
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
@@ -474,7 +474,7 @@ public class QL_HoaDon extends javax.swing.JFrame {
             intput.close();
 
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Không tìm thấy Hóa đơn");
+            JOptionPane.showMessageDialog(rootPane, "Không tìm thấy Hóa đơn!");
             fin++;
         } catch (IOException | ClassNotFoundException | NumberFormatException ex) {
         }
@@ -483,7 +483,7 @@ public class QL_HoaDon extends javax.swing.JFrame {
                 if("0".equals(giamGiaHD)) txtResult.append("\n\nGiảm giá toàn bộ HĐ: " + giamGiaHD);
                 else txtResult.append("\n\n" + giamGiaHD);
                 txtResult.append("\nTổng tiền:\t" + tongTien + " VND");
-                txtResult.append("\n\n////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n\n");
+                txtResult.append("\n\n///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n\n");
             }
         }
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -526,7 +526,7 @@ public class QL_HoaDon extends javax.swing.JFrame {
                 out.writeObject(txtNgayLapHD.getDate());
                 out.writeObject(txtGiamGiaHD.getText());
 
-                // Ghi chi tiết hóa đơn (table)
+                // Ghi chi tiết hóa đơn (JTable)
                 for(int row=0; row < tblSanPham.getRowCount(); row++) {
                     for(int col=0; col<tblSanPham.getColumnCount(); col++) {
                         out.writeObject(tblSanPham.getValueAt(row, col).toString());
@@ -545,6 +545,7 @@ public class QL_HoaDon extends javax.swing.JFrame {
 
     private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
         try {
+            if("".equals(txtMaSP.getText()) || "".equals(txtTenSP.getText()) || "".equals(txtSoLuong.getText()) || "".equals(txtDonGia.getText())) JOptionPane.showMessageDialog(rootPane, "Thông tin sản phẩm không hợp lệ!");
             HoaDon hd = new HoaDon(
                 txtMaHD.getText()
                 , txtTenKH.getText()
@@ -642,10 +643,8 @@ public class QL_HoaDon extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new QL_HoaDon().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new QL_HoaDon().setVisible(true);
         });
     }
 
