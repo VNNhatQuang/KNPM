@@ -477,8 +477,7 @@ public class QL_HoaDon extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Không tìm thấy Hóa đơn!");
             fin++;
         } catch (IOException | ClassNotFoundException | NumberFormatException ex) {
-        }
-        finally {
+        } finally {
             if(fin==0) {
                 if("0".equals(giamGiaHD)) txtResult.append("\n\nGiảm giá toàn bộ HĐ: " + giamGiaHD);
                 else txtResult.append("\n\n" + giamGiaHD);
